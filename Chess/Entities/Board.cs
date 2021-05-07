@@ -29,7 +29,7 @@ namespace Entities
         public void PutPiece(Piece piece, Position position)
         {
             if(ExistsPiece(position))
-                throw new BoardExeption("Position already ocupped.");
+                throw new BoardException("Position already ocupped.");
 
             Pieces[position.Row, position.Column] = piece;
 
@@ -53,7 +53,7 @@ namespace Entities
         public bool ExistsPiece(Position position)
         {
             if(!ValidPosition(position))
-                throw new BoardExeption("Invalid position");
+                throw new BoardException("Invalid position");
 
             return Pieces[position.Row, position.Column] != null;
         }

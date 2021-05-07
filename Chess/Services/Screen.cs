@@ -1,10 +1,73 @@
 ﻿using System;
+using System.Collections.Generic;
 using Entities;
 
 namespace Services
 {
     class Screen
     {
+        public static void ShowMatch(Match match)
+        {
+            ShowBoard(match.Board);
+
+            ShowCapturedPieces(match);
+
+            Console.WriteLine();
+            Console.WriteLine($"Shift: {match.Shift}");
+
+            if(!match.Finished)
+            {
+                Console.WriteLine($"Waiting moviment: {match.CurrentPlayer}");
+
+                if(match.IsInXeque)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("XEQUE!");
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("XEQUE MATE!");
+                Console.WriteLine($"Winner: {match.CurrentPlayer}");
+            }
+            
+        }
+
+        public static void ShowCapturedPieces(Match match)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Captured Pieces: ");
+            Console.Write("Whites: ");
+
+            ShowCollection(match.CapturedPiecesByColor(Color.White));
+
+            Console.WriteLine();
+
+            ConsoleColor consoleColor = Console.ForegroundColor;
+            
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Blacks: ");
+
+            ShowCollection(match.CapturedPiecesByColor(Color.Black));
+            Console.ForegroundColor = consoleColor;
+
+            Console.WriteLine();
+        }
+
+        public static void ShowCollection(HashSet<Piece> pieces)
+        {
+            Console.Write("[ ");
+
+            foreach(Piece piece in pieces)
+            {
+                Console.Write($"{piece} ");
+            }
+
+            Console.Write(" ]");
+        }
+
         public static void ShowBoard(Board board)
         {
             for(int row = 0; row < board.Rows; row++)

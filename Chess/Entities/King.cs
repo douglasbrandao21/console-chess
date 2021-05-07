@@ -16,43 +16,42 @@
             Position targetPosition = new Position(0, 0);
 
             targetPosition.SetPosition(Position.Row - 1, Position.Column);
-
-            possibleMoviments[targetPosition.Row, targetPosition.Column] = Board.ValidPosition(targetPosition) && CanMove(targetPosition);
+            if(Board.ValidPosition(targetPosition) && CanMove(targetPosition))
+                possibleMoviments[targetPosition.Row, targetPosition.Column] = true;
 
 
             targetPosition.SetPosition(Position.Row -1, Position.Column + 1);
-
-            possibleMoviments[targetPosition.Row, targetPosition.Column] = Board.ValidPosition(targetPosition) && CanMove(targetPosition);
+            if(Board.ValidPosition(targetPosition) && CanMove(targetPosition))
+                possibleMoviments[targetPosition.Row, targetPosition.Column] = true;
 
 
             targetPosition.SetPosition(Position.Row, Position.Column + 1);
+            if(Board.ValidPosition(targetPosition) && CanMove(targetPosition))
+                possibleMoviments[targetPosition.Row, targetPosition.Column] = true;
 
-            possibleMoviments[targetPosition.Row, targetPosition.Column] = Board.ValidPosition(targetPosition) && CanMove(targetPosition);
 
-            
             targetPosition.SetPosition(Position.Row+1, Position.Column+1);
-
-            possibleMoviments[targetPosition.Row, targetPosition.Column] = Board.ValidPosition(targetPosition) && CanMove(targetPosition);
-
+            if(Board.ValidPosition(targetPosition) && CanMove(targetPosition))
+                possibleMoviments[targetPosition.Row, targetPosition.Column] = true;
             
             targetPosition.SetPosition(Position.Row+1, Position.Column);
+            if(Board.ValidPosition(targetPosition) && CanMove(targetPosition))
+                possibleMoviments[targetPosition.Row, targetPosition.Column] = true;
 
-            possibleMoviments[targetPosition.Row, targetPosition.Column] = Board.ValidPosition(targetPosition) && CanMove(targetPosition);
 
-            
             targetPosition.SetPosition(Position.Row+1, Position.Column-1);
-
-            possibleMoviments[targetPosition.Row, targetPosition.Column] = Board.ValidPosition(targetPosition) && CanMove(targetPosition);
+            if(Board.ValidPosition(targetPosition) && CanMove(targetPosition))
+                possibleMoviments[targetPosition.Row, targetPosition.Column] = true;
 
 
             targetPosition.SetPosition(Position.Row, Position.Column-1);
-
-            possibleMoviments[targetPosition.Row, targetPosition.Column] = Board.ValidPosition(targetPosition) && CanMove(targetPosition);
+            if(Board.ValidPosition(targetPosition) && CanMove(targetPosition))
+                possibleMoviments[targetPosition.Row, targetPosition.Column] = true;
 
 
             targetPosition.SetPosition(Position.Row-1, Position.Column-1);
-
-            possibleMoviments[targetPosition.Row, targetPosition.Column] = Board.ValidPosition(targetPosition) && CanMove(targetPosition);
+            if(Board.ValidPosition(targetPosition) && CanMove(targetPosition))
+                possibleMoviments[targetPosition.Row, targetPosition.Column] = true;
 
             return possibleMoviments;
         }

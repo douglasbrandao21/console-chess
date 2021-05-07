@@ -8,20 +8,22 @@ namespace Chess
     {
         static void Main()
         {
-            try
+            Match match = new Match();
+
+            Screen.ShowBoard(match.Board);
+
+            while(!match.Finished)
             {
-                Match match = new Match();
-
-                Screen.ShowBoard(match.Board);
-
-                while(!match.Finished)
+                try
                 {
                     Console.Clear();
 
-                    Screen.ShowBoard(match.Board);
+                    Screen.ShowMatch(match);
 
                     Console.Write("Origin: ");
                     Position origin = Screen.ReadPosition().ToPosition();
+
+                    match.ValidateOriginPosition(origin);
 
                     bool[,] possibleMoviments = match.Board.SinglePiece(origin).PossibleMoviments();
 
@@ -31,19 +33,26 @@ namespace Chess
                     Console.Write("Target: ");
                     Position target = Screen.ReadPosition().ToPosition();
 
-                    match.Moviment(origin, target);
+                    match.ValidateTargetPosition(origin, target);
+
+                    match.Play(origin, target);
                 }
-
-                //Coordinate coordinate = new Coordinate('c', 7);
-
-                //Console.WriteLine(coordinate);
-                //Console.WriteLine(coordinate.ToPosition());
-
+                catch(Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                    Console.ReadLine();
+                }
             }
-            catch(Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-            }
+
+            Console.Clear();
+            Screen.ShowMatch(match);
+
+            //Coordinate coordinate = new Coordinate('c', 7);
+
+            //Console.WriteLine(coordinate);
+            //Console.WriteLine(coordinate.ToPosition());
+
         }
     }
 }
+
