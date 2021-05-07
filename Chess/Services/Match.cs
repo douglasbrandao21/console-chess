@@ -203,12 +203,32 @@ namespace Services
         public void Play(Position origin, Position target)
         {
             Piece capturedPiece = Moviment(origin, target);
+            Piece piece = Board.SinglePiece(target);
 
             if(IsKingInXequeByColor(CurrentPlayer))
             {
                 UndoMoviment(origin, target, capturedPiece);
 
                 throw new BoardException("You cannot put yourself in xeque!");
+            }
+
+            if(piece is Pawn)
+            {
+                if(
+                    (piece.Color == Color.White && target.Row == 0) || 
+                    (piece.Color == Color.Black && target.Row == 7)
+                 )
+                {
+                    piece = Board.RemovePiece(target);
+
+                    PiecesInGame.Remove(piece);
+
+                    Queen queen = new Queen(Board, piece.Color);
+
+                    Board.PutPiece(queen, target);
+
+                    PiecesInGame.Add(queen);
+                }
             }
 
             if(IsKingInXequeByColor(GetAdversary(CurrentPlayer)))
