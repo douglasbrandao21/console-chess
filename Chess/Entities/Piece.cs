@@ -1,6 +1,6 @@
 ﻿namespace Entities
 {
-    class Piece
+    abstract class Piece
     {
         public Position Position { get; set; }
         public Board Board { get; protected set; }
@@ -19,5 +19,14 @@
         {
             QuantityMoviments++;
         }
+
+        protected bool CanMove(Position position)
+        {
+            Piece piece = Board.SinglePiece(position);
+
+            return piece == null || piece.Color != Color;
+        }
+
+        public abstract bool[,] PossibleMoviments();
     }
 }

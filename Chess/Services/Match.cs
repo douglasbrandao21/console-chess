@@ -35,8 +35,10 @@ namespace Services
             Board.PutPiece(new Tower(Board, Color.White), new Coordinate('c', 1).ToPosition());
             Board.PutPiece(new Tower(Board, Color.White), new Coordinate('c', 2).ToPosition());
 
-            Board.PutPiece(new Tower(Board, Color.Black), new Coordinate('c', 7).ToPosition());
-            Board.PutPiece(new Tower(Board, Color.Black), new Coordinate('c', 8).ToPosition());
+            Board.PutPiece(new Tower(Board, Color.White), new Coordinate('c', 7).ToPosition());
+            Board.PutPiece(new Tower(Board, Color.White), new Coordinate('c', 8).ToPosition());
+
+            Board.PutPiece(new King(Board, Color.White), new Coordinate('d', 7).ToPosition());
         }
     }
 }

@@ -12,34 +12,64 @@ namespace Services
                 Console.Write(8 - row + " ");
                 for(int column = 0; column < board.Columns; column++)
                 {
-                    if(board.SinglePiece(row, column) == null)
-                        Console.Write("- ");
-                    else
-                    {
-                        PrintPiece(board.SinglePiece(row, column));
-                        Console.Write(" ");
-                    }
+                    PrintPiece(board.SinglePiece(row, column));
                 }
                 Console.WriteLine();
             }
             Console.WriteLine("  a b c d e f g h");
         }
 
+        public static void ShowBoard(Board board, bool[,] possibleMoviments)
+        {
+            ConsoleColor originalBackground = Console.BackgroundColor;
+            ConsoleColor darkGray = ConsoleColor.DarkGray;
+
+            for(int row = 0; row < board.Rows; row++)
+            {
+                Console.Write(8 - row + " ");
+                for(int column = 0; column < board.Columns; column++)
+                {
+                    if(possibleMoviments[row, column])
+                        Console.BackgroundColor = darkGray;
+                    else
+                        Console.BackgroundColor = originalBackground;
+
+                    PrintPiece(board.SinglePiece(row, column));
+
+                    Console.BackgroundColor = originalBackground;
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("  a b c d e f g h");
+
+            
+        }
+
         private static void PrintPiece(Piece piece)
         {
-            if(piece.Color == Color.White)
-                Console.Write(piece);
-
+            if(piece == null)
+            {
+                Console.Write("- ");
+            }
             else
             {
-                ConsoleColor consoleColor = Console.ForegroundColor;
+                if(piece.Color == Color.White)
+                    Console.Write(piece);
 
-                Console.ForegroundColor = ConsoleColor.Green;
+                else
+                {
+                    ConsoleColor consoleColor = Console.ForegroundColor;
 
-                Console.Write(piece);
+                    Console.ForegroundColor = ConsoleColor.Green;
 
-                Console.ForegroundColor = consoleColor;
+                    Console.Write(piece);
+
+                    Console.ForegroundColor = consoleColor;
+                }
+                Console.Write(" ");
             }
+
+            
         }
 
         public static Coordinate ReadPosition()
