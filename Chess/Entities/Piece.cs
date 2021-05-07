@@ -14,5 +14,10 @@
             Board = board;
             Color = color;
         }
+
+        public void IncreaseMoviments()
+        {
+            QuantityMoviments++;
+        }
     }
 }

@@ -8,10 +8,10 @@ namespace Entities
         public int Columns { get; set; }
         private Piece[,] Pieces;
 
-        public Board(int rows, int columns)
+        public Board()
         {
-            Rows = rows;
-            Columns = columns;
+            Rows = 8;
+            Columns = 8;
 
             Pieces = new Piece[Rows, Columns];
         }
@@ -26,14 +26,6 @@ namespace Entities
             return Pieces[position.Row, position.Column];
         }
 
-        public bool ExistsPiece(Position position)
-        {
-            if(!ValidPosition(position))
-                throw new BoardExeption("Invalid position");
-
-            return Pieces[position.Row, position.Column] != null;
-        }
-
         public void PutPiece(Piece piece, Position position)
         {
             if(ExistsPiece(position))
@@ -42,6 +34,28 @@ namespace Entities
             Pieces[position.Row, position.Column] = piece;
 
             piece.Position = position;
+        }
+
+        public Piece RemovePiece(Position position)
+        {
+            Piece piece = SinglePiece(position);
+
+            if(!ValidPosition(position) || piece == null)
+                return null;
+
+            piece.Position = null;
+
+            Pieces[position.Row, position.Column] = null;
+
+            return piece;
+        }
+
+        public bool ExistsPiece(Position position)
+        {
+            if(!ValidPosition(position))
+                throw new BoardExeption("Invalid position");
+
+            return Pieces[position.Row, position.Column] != null;
         }
 
         public bool ValidPosition(Position position)

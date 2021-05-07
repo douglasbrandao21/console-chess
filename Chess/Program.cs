@@ -10,13 +10,30 @@ namespace Chess
         {
             try
             {
-                Board board = new Board(8, 8);
+                Match match = new Match();
 
-                board.PutPiece(new King(board, Color.Black), new Position(0, 0));
+                Screen.ShowBoard(match.Board);
 
-                board.PutPiece(new Tower(board, Color.Black), new Position(1, 0));
+                while(!match.Finished)
+                {
+                    Console.Clear();
 
-                Screen.ShowBoard(board);
+                    Screen.ShowBoard(match.Board);
+
+                    Console.Write("Origin: ");
+                    Position origin = Screen.ReadPosition().ToPosition();
+
+                    Console.Write("Target: ");
+                    Position target = Screen.ReadPosition().ToPosition();
+
+                    match.Moviment(origin, target);
+                }
+
+                //Coordinate coordinate = new Coordinate('c', 7);
+
+                //Console.WriteLine(coordinate);
+                //Console.WriteLine(coordinate.ToPosition());
+
             }
             catch(Exception exception)
             {
